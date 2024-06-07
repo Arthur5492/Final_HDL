@@ -28,8 +28,10 @@ input wire end_time;
 input wire win;
 input wire match;
 	
-output reg R1,R2;
-output reg E1,E2,E3,E4;
-output reg SEL;
-	
+output wire R1,R2;
+output wire E1,E2,E3,E4;
+output wire SEL;
+
+assign R2 = reset;
+
 endmodule

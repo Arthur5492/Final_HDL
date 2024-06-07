@@ -39,33 +39,43 @@ module topo
 	output reg [P_HEX-1:0] HEX5;
 	
 //always @(posedge CLOCK_50) LEDR = 0;
-	
+
+wire w_end_FPGA,w_end_User,w_endtime;
+wire w_win, w_match; 
+wire w_R1, w_R2;
+wire w_E1, w_E2, w_E3, w_E4;
+wire w_SEL;
+
 Datapath U0_DP
 (
 	//Input Data
-	.CLOCK_50(),
-	.KEY(),
-	.SWITCH(),
+	.CLOCK_50(CLOCK_50),
+	.KEY(KEY),
+	.SWITCH(SW[9:2]),
 	//Input Commands
-	.R1(), .R2(),
-	.E1(),.E2(),.E3(),.E4(),
-	.SEL(),
+	.R1(w_R1), .R2(w_R2),
+	.E1(w_E1),.E2(w_E2),.E3(w_E3),.E4(w_E4),
+	.SEL(w_SEL),
 	//Output Data
 	.hex0(),.hex1(),.hex2(),.hex3(),.hex4(),.hex5(),
 	.leds(),
 	//Output Status
-	.end_FPGA(),.end_User(),.end_time(), 
-	.win(), .match()
+	.end_FPGA(w_end_FPGA),.end_User(w_end_User),.end_time(w_endtime), 
+	.win(w_win), .match(w_match)
 );
 
 Controle U1_FSM
 (
-	.CLOCK(CLOCK_50), .enter(), .reset(),
-	.end_FPGA(), .end_User(), .end_time(),
-	.win(), .match(),
-	.R1(),.R2(),
-	.E1(),.E2(),.E3(),.E4(),
-	.SEL()
+	//INPUT DATA
+	.CLOCK(CLOCK_50),
+	.enter(SW[0]), .reset(SW[1]),
+	//INPUT STATUS
+	.end_FPGA(w_end_FPGA), .end_User(w_end_User), .end_time(w_endtime),
+	.win(w_win), .match(w_match),
+	//OUTPUT COMMANDS
+	.R1(w_R1),.R2(w_R2),
+	.E1(w_E1),.E2(w_E2),.E3(w_E3),.E4(w_E4),
+	.SEL(w_SEL)
 );
 
 endmodule

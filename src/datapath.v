@@ -51,6 +51,17 @@ module Datapath
 	output wire end_FPGA, end_User, end_time;
 	output wire win,match;
 	
-	// Additional Module Item(s)
+	
+//LIGAR NO DEC7SEG
+wire [3:0] w_tempo;
+counter_time U0_CT
+(
+	.CLKT(CLOCK_50), 
+	.R(R2), //Reset
+	.E(E2),	//Enable
+	.TEMPO(w_tempo), //Actual tempo value
+	.end_time(end_time) // end time flag
+
+);
 
 endmodule
