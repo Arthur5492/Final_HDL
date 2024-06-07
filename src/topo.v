@@ -13,16 +13,8 @@
 module topo
 
 (
-	CLOCK_50,
-	KEY,
-	SW,
-	LEDR,
-	HEX0,
-	HEX1,
-	HEX2,
-	HEX3,
-	HEX4,
-	HEX5
+	CLOCK_50, KEY, SW,
+	LEDR,HEX0,HEX1,HEX2,HEX3,HEX4,HEX5
 );
 
 	//Parametroos locais
@@ -46,6 +38,34 @@ module topo
 	output reg [P_HEX-1:0] HEX4;
 	output reg [P_HEX-1:0] HEX5;
 	
-	always @(posedge CLOCK_50) LEDR = 0;
+//always @(posedge CLOCK_50) LEDR = 0;
 	
+Datapath U0_DP
+(
+	//Input Data
+	.CLOCK_50(),
+	.KEY(),
+	.SWITCH(),
+	//Input Commands
+	.R1(), .R2(),
+	.E1(),.E2(),.E3(),.E4(),
+	.SEL(),
+	//Output Data
+	.hex0(),.hex1(),.hex2(),.hex3(),.hex4(),.hex5(),
+	.leds(),
+	//Output Status
+	.end_FPGA(),.end_User(),.end_time(), 
+	.win(), .match()
+);
+
+Controle U1_FSM
+(
+	.CLOCK(CLOCK_50), .enter(), .reset(),
+	.end_FPGA(), .end_User(), .end_time(),
+	.win(), .match(),
+	.R1(),.R2(),
+	.E1(),.E2(),.E3(),.E4(),
+	.SEL()
+);
+
 endmodule

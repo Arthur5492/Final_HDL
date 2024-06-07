@@ -19,9 +19,9 @@ module Datapath
 	//Input Commands
 	R1,R2,
 	E1,E2,E3,E4,
-	SEL
+	SEL,
 	//Output Data
-	hex0,hex1,hex2,hex3,hex4,hex5
+	hex0,hex1,hex2,hex3,hex4,hex5,
 	leds,
 	//Output Status
 	end_FPGA, end_User, end_time, 
@@ -40,11 +40,11 @@ module Datapath
 	input wire [P_KEY-1:0] KEY;
 	input wire [P_SWITCH-1:0] SWITCH;	
 	input wire R1,R2;
-	input wire E1,E2,E3,E4,E5;
+	input wire E1,E2,E3,E4;
 	input wire SEL;
 	
 	// Output Port(s)
-	output reg [P_HEX-1:0] HEX0,HEX1,HEX2,HEX3,HEX4,HEX5;
+	output reg [P_HEX-1:0] hex0,hex1,hex2,hex3,hex4,hex5;
 	output reg [P_LEDS-1:0] leds;
 	
 	//Output Status
