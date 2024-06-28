@@ -32,7 +32,7 @@ always @(address) begin
 				4'b1101: saida = 4'b0001;
 				4'b1110: saida = 4'b0001;
 				4'b1111: saida = 4'b0001;
-            default: output_reg = 4'b0000;  // Default case to handle unexpected values
+            default: saida = 4'b0000;  // Default case to handle unexpected values
         endcase
 end
 
