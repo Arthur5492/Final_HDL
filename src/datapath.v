@@ -53,17 +53,16 @@ module Datapath
 	
 	
 //LIGAR NO DEC7SEG
-wire [3:0] TIME;
-counter_time U0_CT
+counter #(4)
+U0_counter_time
 (
-	.CLKT(CLOCK_50), 
-	.R(R2), //Reset
-	.E(E2),	//Enable
-	.TEMPO(TIME), //Actual tempo value
-	.end_time(end_time) // end time flag
+    .clk(CLOCK_50),
+	 .r(R2),
+	 .e(E2),
+	 .data(4'b1010),
+	 .tc(end_time),
+	 .count(TIME)
 );
-
-
 
 /////HEX5_INIT
 wire w_win;
@@ -180,6 +179,8 @@ mux2x1 MUX8
 	.q(hex1)
 );
 /////HEX1_END
+
+/////HEX0_INIT
 wire [3:0] ROUND;
 wire [6:0] w_dec3_mux9;
 dec7seg DEC3
@@ -202,5 +203,7 @@ mux2x1 MUX9
 	.sel(SEL),
 	.q(hex0)
 );
-/////HEX0_INIT
+/////HEX0_END
+
+
 endmodule
